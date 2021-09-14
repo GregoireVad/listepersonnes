@@ -1,4 +1,4 @@
-name: "auth"
+name: "prod"
 
 on:
   push:
@@ -9,15 +9,15 @@ on:
 jobs:
   test:
     ## We want to define a strategy for our job
-    strategy:
+    ##strategy:
       ## this will contain a matrix of all of the combinations
       ## we wish to test again:
-      matrix:
-        go-version: [1.14.x]
-        platform: [ubuntu-latest]
+      ##matrix:
+        ##go-version: [1.14.x]
+        ##platform: [ubuntu-latest]
 
     ## Defines the platform for each test run
-    runs-on: ${{ matrix.platform }}
+    runs-on: [debian-latest]
 
     ## the steps that will be run through for each version and platform
     ## combination
