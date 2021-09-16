@@ -42,7 +42,10 @@ jobs:
     name: push docker image to docker hub
     runs-on: ubuntu-latest
     needs: test
-    steps: 
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
     - name: login
       uses: docker/login-action@v1
       with:
