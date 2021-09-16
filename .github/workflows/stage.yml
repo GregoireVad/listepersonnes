@@ -11,11 +11,11 @@ jobs:
       ## this will contain a matrix of all of the combinations
       ## we wish to test again:
       matrix:
-        go-version: [1.14.x]
+        node-version: [12.22.x]
         platform: [ubuntu-latest]
 
     ## Defines the platform for each test run
-    runs-on: [ubuntu-latest]
+    runs-on: ${{ matrix.platform }}
 
     ## the steps that will be run through for each version and platform
     ## combination
@@ -24,7 +24,10 @@ jobs:
     - name: Setup Node
       uses: actions/setup-node@v1
       with:
-        node-version: '12.x'
+        node-version: ${{ matrix.node-version}}
+    - name: Init nodejs
+      run: |-
+        npm install
 
     ## checks out our code locally so we can work with the files
     - name: Checkout code
@@ -33,8 +36,7 @@ jobs:
     # run tests for route
     - name: Run tests
       run: |-
-        cd services/auth
-        go test ./...
+        npm test
   build:
     needs: test
     runs-on: ubuntu-latest
@@ -46,19 +48,8 @@ jobs:
         with:
           username: gregoirevadancourt
           password: greggreg76
-          dockerfile: /dockerfile
+          dockerfile: dockerfile
           repository: gregoirevadancourt/node-web-app
           tag_with_ref: true
-          
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:    
-      - name: executing remote ssh commands using password
-        uses: appleboy/ssh-action@master
-        with:
-          host: 192.168.45.129
-          username: greg
-          password: greg
-          port: 22
-          script: "cd /root/Verre-Tech-Back/ && sh deploy.sh"
+  
+
