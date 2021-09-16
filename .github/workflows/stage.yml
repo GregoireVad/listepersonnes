@@ -1,9 +1,10 @@
-name: stage
+name: majdocker
 
 on:   
   push:    
     branches:
       - Stage
+      - main
 jobs:
   test:
     ## We want to define a strategy for our job
