@@ -58,8 +58,8 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ buildandpush.meta.outputs.tags }}
-        labels: ${{ buildandpush.meta.outputs.labels }}
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
 
 
     
