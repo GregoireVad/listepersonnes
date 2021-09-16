@@ -41,6 +41,7 @@ jobs:
   push_to_registry:
     name: push docker image to docker hub
     runs-on: ubuntu-latest
+    needs: test
     steps: 
     - name: Login to docker hub
       uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
