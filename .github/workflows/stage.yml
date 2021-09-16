@@ -46,19 +46,25 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
       
-    - name: login
-      uses: docker/login-action@v1
-      with:
+    - name: Login to docker hub
+      uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+      with: 
         username: gregoirevadancourt
         password: greggreg76
-    - name: Build and push
-      uses: docker/build-push-action@v2
-      with: 
+
+    - name: Extract metadata tag label for docker
+      id: meta
+      uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+      with:
+        images: gregoirevadancourt/node-web-app
+        
+    - name: Build and push docker image 
+      uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+      with:
         context: .
         push: true
-        tags: gregoirevadancourt/node-web-app:latest
-      
-        
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
 
     
   
