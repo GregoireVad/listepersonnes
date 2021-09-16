@@ -38,7 +38,7 @@ jobs:
       run: |-
         npm test
         
-  buildandpush:
+  push_to_registry:
     name: push docker image to docker hub
     runs-on: ubuntu-latest
     steps: 
