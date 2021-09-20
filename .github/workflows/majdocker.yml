@@ -42,7 +42,7 @@ jobs:
   push_to_registry:
     name: push docker image to docker hub
     runs-on: ubuntu-latest
-    needs: test
+    #needs: test
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
