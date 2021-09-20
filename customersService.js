@@ -13,7 +13,7 @@ require("./CustomerModel");
 const Customer = mongoose.model("Customer");
 
 //Connect
-const url = `mongodb+srv://Clangendev:DevClangend0193@microservice.qovqg.mongodb.net/custumersservice`
+const url = process.env.CONNECTDATABASE
 
 mongoose.connect(url, {
     useNewUrlParser: true,
