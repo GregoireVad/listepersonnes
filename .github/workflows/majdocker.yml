@@ -1,0 +1,70 @@
+name: majdocker
+
+on:   
+  push:    
+    branches:
+      - Stage
+      - main
+jobs:
+  test:
+    ## We want to define a strategy for our job
+    strategy:
+      ## this will contain a matrix of all of the combinations
+      ## we wish to test again:
+      matrix:
+        node-version: [12.22.x]
+        platform: [ubuntu-latest]
+
+    ## Defines the platform for each test run
+    runs-on: ${{ matrix.platform }}
+
+    ## the steps that will be run through for each version and platform
+    ## combination
+    steps:
+    ## sets up go based on the version
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version}}
+    - name: Init nodejs
+      run: |-
+        npm install
+
+    ## checks out our code locally so we can work with the files
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    # run tests for route
+    - name: Run tests
+      run: |-
+        npm test
+        
+  push_to_registry:
+    name: push docker image to docker hub
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Login to docker hub
+      uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+      with: 
+        username: gregoirevadancourt
+        password: greggreg76
+
+    - name: Extract metadata tag label for docker
+      id: meta
+      uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+      with:
+        images: gregoirevadancourt/node-web-app
+        
+    - name: Build and push docker image 
+      uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+      with:
+        context: .
+        push: true
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+  
+
