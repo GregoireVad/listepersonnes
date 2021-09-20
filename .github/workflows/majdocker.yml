@@ -66,21 +66,5 @@ jobs:
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
-  deploy:
-    needs: push_to_registry
-    runs-on: ubuntu-latest
-    steps:    
-      - name: executing remote ssh commands using password
-        uses: appleboy/ssh-action@master
-        with:
-          host: 192.168.45.129
-          username: greg
-          password: greg
-          port: 22
-          if: ${{ steps.meta.outputs.labels == 'main' }}
-          run: "sh recette.sh"
-          if: ${{ steps.meta.outputs.labels == 'Stage' }}
-          run: "sh prod.sh"
-    
   
 
