@@ -16,4 +16,6 @@ RUN npm install
 COPY . .
 
 EXPOSE 5555
+
+ENV CONNECTDATABASE=mongodb+srv://Clangendev:DevClangend0193@microservice.qovqg.mongodb.net/custumersservice
 CMD [ "node", "customersService.js" ]

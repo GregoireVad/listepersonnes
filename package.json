@@ -5,14 +5,15 @@
   "author": "First Last <first.last@example.com>",
   "main": "server.js",
   "scripts": {
-    "start": "node customersService.js",
-    "test": "mocha ./tests/* --exit", 
+    "start": "env-cmd -f ./.env node customersService.js",
+    "test": "mocha ./tests/* --exit",
     "dev": "nodemon customersService.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "env-cmd": "^10.1.0",
     "express": "^4.17.1",
     "mongoose": "^5.11.19"
   },
