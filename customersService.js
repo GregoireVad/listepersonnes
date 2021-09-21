@@ -3,7 +3,6 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require('cors')
-
 app.use(cors())
 app.use(bodyParser.json());
 
@@ -14,7 +13,7 @@ require("./CustomerModel");
 const Customer = mongoose.model("Customer");
 
 //Connect
-const url = `mongodb+srv://Clangendev:DevClangend0193@microservice.qovqg.mongodb.net/custumersservice`
+const url = process.env.CONNECTDATABASE
 
 mongoose.connect(url, {
     useNewUrlParser: true,
@@ -30,7 +29,7 @@ mongoose.connect(url, {
     });
 
 app.get('/', (req, res) => {
-    res.send("This is customers service")
+    res.send("Hello World!")
 });
 
 //Create funct

@@ -1,0 +1,26 @@
+version: "3.9"
+services: 
+  api:
+    image: gregoirevadancourt/node-web-app:Stage
+    #restart: always
+    ports: 
+      - 5555:5555
+    environment: 
+      - CONNECTDATABASE=mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+    networks: 
+      - RecetteNetwork
+    container_name: recetteapi
+
+  db:
+    image: mongo:4.2.16
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    networks: 
+      - RecetteNetwork
+
+
+networks: 
+  RecetteNetwork:
+    name: recettenetwork
