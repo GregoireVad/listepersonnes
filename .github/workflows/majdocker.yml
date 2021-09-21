@@ -9,7 +9,7 @@ jobs:
   test:
     ## We want to define a strategy for our job
     strategy:
-      ## this will contain a matrix of all ofthe combinations
+      ## this will contain a matrix of all of the combinations
       ## we wish to test again:
       matrix:
         node-version: [12.22.x]
@@ -29,7 +29,6 @@ jobs:
     - name: Init nodejs
       run: |-
         npm install
-
     ## checks out our code locally so we can work with the files
     - name: Checkout code
       uses: actions/checkout@v2
@@ -42,7 +41,7 @@ jobs:
   push_to_registry:
     name: push docker image to docker hub
     runs-on: ubuntu-latest
-    needs: test
+    #needs: test
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -64,10 +63,5 @@ jobs:
       with:
         context: .
         push: true
-        tags: '${{ steps.meta.outputs.tags }}${{ github.run.id }}'
+        tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
-      
-
-    
-  
-
