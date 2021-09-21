@@ -29,7 +29,6 @@ jobs:
     - name: Init nodejs
       run: |-
         npm install
-
     ## checks out our code locally so we can work with the files
     - name: Checkout code
       uses: actions/checkout@v2
@@ -66,5 +65,3 @@ jobs:
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
-  
-
