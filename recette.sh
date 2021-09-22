@@ -1,11 +1,3 @@
-echo 'Docker compose down'
-
+docker pull gregoirevadancourt/node-web-app:Stage
 docker-compose down
-
-echo 'Docker compose pull'
-
-docker-compose pull
-
-echo 'Docker compose up'
-
 docker-compose up
