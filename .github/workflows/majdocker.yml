@@ -29,9 +29,9 @@ jobs:
     - name: Init nodejs
       run: |-
         npm install
-    - name: Init nodejs
+    - name: Init jest
       run: |-
-        npm install jest
+        npm install --save-dev jest
     ## checks out our code locally so we can work with the files
     - name: Checkout code
       uses: actions/checkout@v2
