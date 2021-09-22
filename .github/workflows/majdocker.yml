@@ -29,9 +29,6 @@ jobs:
     - name: Init nodejs
       run: |-
         npm install
-    - name: Init jest
-      run: |-
-        npm install jest
     ## checks out our code locally so we can work with the files
     - name: Checkout code
       uses: actions/checkout@v2
@@ -39,7 +36,7 @@ jobs:
     # run tests for route
     - name: Run tests
       run: |-
-        npm test
+        npm run test
         
   push_to_registry:
     name: push docker image to docker hub
