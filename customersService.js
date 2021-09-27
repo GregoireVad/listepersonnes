@@ -32,26 +32,6 @@ app.get('/', (req, res) => {
     res.send("Hello World!!!!")
 });
 
-//Create funct
-app.post("/customer", (req, res) => {
-    let newCustomer = {
-        Nom: req.body.Nom,
-        Prenom: req.body.Prenom,
-        Age: req.body.Age,
-    }
-
-    let customer = new Customer(newCustomer);
-
-    customer.save().then(() => {
-        console.log("New customer created!");
-    }).catch((err) => {
-        if (err) {
-            throw err;
-        }
-    });
-    res.send("A new customer created with success!")
-});
-
 app.get("/customers", (req, res) => {
     Customer.find().then((customers) => {
         console.log('customers', customers)
@@ -63,30 +43,15 @@ app.get("/customers", (req, res) => {
     });
 });
 
-app.get("/customer/:id", (req, res) => {
-    Customer.findById(req.params.id).then((customer) => {
-        if (customer) {
-            res.json(customer);
-        } else {
-            res.sendStatus(404);
-        }
+app.get("/lastcustomers", (req, res) => {
+    Customer.find().limit(2).then((customers) => {
+        res.json(customers);
     }).catch((err) => {
         if (err) {
             throw err;
         }
     });
 });
-
-app.delete("/customer/:id", (req, res) => {
-    Customer.findOneAndRemove(req.params.id).then(() => {
-        res.send("delete")
-    }).catch((err) => {
-        if (err) {
-            throw err;
-        }
-    });
-});
-
 
 app.listen(5555, () => {
     console.log("Up and running -- This is our Customers service");
