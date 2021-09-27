@@ -66,3 +66,35 @@ jobs:
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
+      
+  deploy_prod:
+    name: deploy prod
+    runs-on: ubuntu-latest
+    needs: push_to_registry
+    if: ${{ github.ref == 'refs/heads/main' }}
+    steps:
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: 51.103.83.196
+        username: greg
+        password: greggreg
+        port: 22
+        script: sudo sh prod.sh
+        
+  deploy_preprod:
+    name: deploy preprod
+    runs-on: ubuntu-latest
+    needs: push_to_registry
+    if: ${{ github.ref == 'refs/heads/Stage' }}
+    steps:
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: 51.103.83.196
+        username: greg
+        password: greggreg
+        port: 22
+        script: sudo sh recette.sh
+
+        
