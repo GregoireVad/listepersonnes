@@ -35,8 +35,7 @@ jobs:
 
     # run tests for route
     - name: Run tests
-      run: |-
-        npm test
+      uses: stefanoeb/jest-action@1.0.4
         
   push_to_registry:
     name: push docker image to docker hub
