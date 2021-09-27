@@ -26,18 +26,18 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version}}
+        
+        ## checks out our code locally so we can work with the files
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
     - name: Init nodejs
       run: |-
         npm install
 
-    ## checks out our code locally so we can work with the files
-    - name: Checkout code
-      uses: actions/checkout@v2
-
     # run tests for route
     - name: Run tests
-      run: |-
-        npm test
+      uses: stefanoeb/jest-action@1.0.4
         
   push_to_registry:
     name: push docker image to docker hub
@@ -66,5 +66,3 @@ jobs:
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
-  
-
