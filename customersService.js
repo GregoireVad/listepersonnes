@@ -72,6 +72,15 @@ app.post("/customer", (req, res) => {
     res.send("A new customer created with success!")
 });
 
+app.delete("/customer/:id", (req, res) => {
+    Customer.findOneAndRemove(req.params.id).then(() => {
+        res.send("delete")
+    }).catch((err) => {
+        if (err) {
+            throw err;
+        }
+    });
+});
 
 app.listen(5555, () => {
     console.log("Up and running -- This is our Customers service");
