@@ -53,6 +53,26 @@ app.get("/lastcustomers", (req, res) => {
     });
 });
 
+app.post("/customer", (req, res) => {
+    let newCustomer = {
+        Nom: req.body.Nom,
+        Prenom: req.body.Prenom,
+        Age: req.body.Age,
+    }
+
+    let customer = new Customer(newCustomer);
+
+    customer.save().then(() => {
+        console.log("New customer created!");
+    }).catch((err) => {
+        if (err) {
+            throw err;
+        }
+    });
+    res.send("A new customer created with success!")
+});
+
+
 app.listen(5555, () => {
     console.log("Up and running -- This is our Customers service");
 });
