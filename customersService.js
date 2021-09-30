@@ -11,7 +11,9 @@ const mongoose = require("mongoose");
 
 require("./CustomerModel");
 const Customer = mongoose.model("Customer");
-
+const dotenv = require("dotenv");
+dotenv.config();
+require('dotenv').config({ path: '.env' });
 //Connect
 const url = process.env.CONNECTDATABASE
 
