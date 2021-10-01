@@ -31,7 +31,7 @@ mongoose.connect(url, {
     });
 
 app.get('/', (req, res) => {
-    res.send("Hello World!!!")
+    res.send("Hello World!!")
 });
 
 app.get("/customers", (req, res) => {
